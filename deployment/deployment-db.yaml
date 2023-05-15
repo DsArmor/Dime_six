@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-5
+  template:
+    metadata:
+      labels:
+        app: api-5
+        db: mongo
+    spec:
+      containers:
+        - name: api-5-mongodb
+          image: cr.yandex/crp6bo24jkr74p5qvb1o/mongo@sha256:3fa5e59fdb0b7c42bd2db52142ecbc673b0c1356b115b9ad2b32436e14281e4f
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: example
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-svc
+spec:
+  selector:
+    db: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      name: mongodb
+      targetPort: 27017
+  clusterIP: None

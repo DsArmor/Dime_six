@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-5
+  template:
+    metadata:
+      labels:
+        app: api-5
+        web: react
+    spec:
+      containers:
+        - name: api-5-react
+          image: cr.yandex/crp6bo24jkr74p5qvb1o/addressbook-react@sha256:c3283466be71867ba9c80488f6926b6545aae65ef0aff8649483ac46d94a7af9
+          env:
+            - name: back_url
+              value: "spring-svc:3002" # вот тут нужно что хочешь сделать, но достучаться до конечного пункта
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-ingress
+spec:
+  ports:
+    - port: 3001
+      name: plaintext
+      targetPort: 3000
+  selector:
+    web: react
+  type: LoadBalancer

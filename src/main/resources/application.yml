@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/dime"
+    username: argoc
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        enable_lazy_load_no_trans: true
+application:
+  jwt:
+    secretKey: notsecurenotsecurenotsecurenotsecurenotsecurenotsecure
+    tokenPrefix: Bearer
+    tokenExpirationAfterDays: 10

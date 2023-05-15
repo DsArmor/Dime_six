@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-5
+  template:
+    metadata:
+      labels:
+        app: api-5
+        back: spring
+    spec:
+      containers:
+        - name: api-5-react
+          image: cr.yandex/crp6bo24jkr74p5qvb1o/addressbook-server@sha256:f974a70a2a1dd69d219ecc00ba0cf89e0ff6bdd05e6fa6dd40526de610961b8a
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_HOST
+              value: "mongo-svc"
+            - name: MONGO_PORT
+              value: "27017"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-svc
+spec:
+  selector:
+    back: spring
+  ports:
+    - port: 8080
+      name: spring-back
+      targetPort: 8080
+  type: ClusterIP
+
+---
+
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: back-ingress
+#spec:
+#  ports:
+#    - port: 3002
+#      name: backplaintext
+#      targetPort: 8080
+#  selector:
+#    back: spring
+#  type: LoadBalancer
