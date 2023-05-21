@@ -41,10 +41,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                    .antMatchers("/", "/registration/**", "/room/**").permitAll()
-                    .antMatchers("/hotel/{hotelId}/**")
+                    .antMatchers("/api/v1/", "/api/v1/registration/**", "/api/v1/room/**").permitAll()
+                    .antMatchers("/api/v1/hotel/{hotelId}/**")
                         .access("@userSecurity.hasUserId(authentication, #hotelId) and hasAuthority('HOTEL')")
-                    .antMatchers("/backpacker/{backpackerId}/**")
+                    .antMatchers("/api/v1/backpacker/{backpackerId}/**")
                         .access("@userSecurity.hasUserId(authentication, #backpackerId) and hasAuthority('USER')")
                     .anyRequest().authenticated();
         http.cors(Customizer.withDefaults());
