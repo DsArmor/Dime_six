@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.dancompany</groupId>
 	<artifactId>booking</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>booking</name>
 	<description>Dime booking awesome booking</description>
 	<properties>

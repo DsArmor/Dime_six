@@ -2,20 +2,20 @@ version: "3.9"
 
 services:
 
-#  server:
-#    container_name: spring_container_trpp
-#    build: .
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres
-#    environment:
-#      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_container_trpp:5432/spring_db"
-#      SPRING_DATASOURCE_USERNAME: "argoc"
-#      SPRING_DATASOURCE_PASSWORD: "123"
-#      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
-#    networks:
-#      - postgres
+  server:
+    container_name: spring_container_booking
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_container_booking:5432/dime"
+      SPRING_DATASOURCE_USERNAME: "argoc"
+      SPRING_DATASOURCE_PASSWORD: "123"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+    networks:
+      - main
 
   postgres:
     container_name: postgres_container_booking
@@ -43,7 +43,7 @@ services:
           cpus: '1'
           memory: 4G
     networks:
-      - postgres
+      - main
 
   pgadmin:
     container_name: pgadmin_container_booking
@@ -63,8 +63,18 @@ services:
           cpus: '0.5'
           memory: 1G
     networks:
-      - postgres
+      - main
+
+  react:
+    container_name: react_container_booking
+    build: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    networks:
+      - main
 
 networks:
-  postgres:
+  main:
     driver: bridge
