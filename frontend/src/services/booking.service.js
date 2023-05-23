@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth.header";
 
-const API_URL = "http://localhost:8080/api/v1/backpacker";
+const API_URL = "http://"  + process.env.REACT_APP_HOST_IP_ADDRESS + ":8080/api/v1/backpacker";
 
 const backpackerId = JSON.parse(localStorage.getItem("id"));
 
