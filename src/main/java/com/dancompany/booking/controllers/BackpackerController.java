@@ -74,12 +74,11 @@ public class BackpackerController {
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/{backpackerId}/room/{roomId}/booking/{bookingId}",
+            value = "/{backpackerId}/room/booking/{bookingId}",
             produces = { "application/json" }
     )
     public ResponseEntity<Void> updateBooking(
             @Positive @PathVariable("backpackerId") Long backpackerId,
-            @Positive @PathVariable("roomId") Long roomId,
             @Positive @PathVariable("bookingId") Long bookingId,
             @RequestBody BookingRequest bookingRequest) {
         return wrapWithoutResult(bookingService::updateBooking, backpackerId, bookingId, bookingRequest);
@@ -87,12 +86,11 @@ public class BackpackerController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/{backpackerId}/room/{roomId}/booking/{bookingId}",
+            value = "/{backpackerId}/room/booking/{bookingId}",
             produces = { "application/json" }
     )
     public ResponseEntity<Void> deleteBooking(
             @Positive @PathVariable("backpackerId") Long backpackerId,
-            @Positive @PathVariable("roomId") Long roomId,
             @Positive @PathVariable("bookingId") Long bookingId) {
         return wrapWithoutResult(bookingService::deleteById, backpackerId, bookingId);
     }

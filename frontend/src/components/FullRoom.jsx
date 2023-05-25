@@ -15,11 +15,12 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {Stack} from "@mui/material";
 import bookingService from "./../services/booking.service"
+import {DateField} from "@mui/x-date-pickers/DateField/DateField";
 
 const FullRoom = (props) => {
 
-    const [start, setStart] = React.useState(new Date('2022-05-22T00:00:00.000Z'));
-    const [end, setEnd] = React.useState(new Date('2022-05-22T00:00:00.000Z'));
+    const [start, setStart] = React.useState(new Date());
+    const [end, setEnd] = React.useState(new Date());
     const [formErrors, setFormErrors] = useState({});
 
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const FullRoom = (props) => {
     const validate = (values) => {
         const errors = {};
         errors.server = values;
-        errors.message = "На данный период забронировано";
+        errors.message = "На данный период недоступно";
         return errors;
     }
 
@@ -63,10 +64,14 @@ const FullRoom = (props) => {
                                 {props.room.description}
                             </Typography>
                             <Typography variant="h5" color="text.secondary" paddingBottom="2px">
-                                {props.room.startAllocationDateTime}
+                                {props.room.startAllocationDateTime.split('T')[0]}{" "}
+                                {props.room.startAllocationDateTime.split('T')[1].split('Z')[0].split(':')[0]}:
+                                {props.room.startAllocationDateTime.split('T')[1].split('Z')[0].split(':')[1]}
                             </Typography>
                             <Typography variant="h5" color="text.secondary" paddingBottom="2px">
-                                {props.room.endAllocationDateTime}
+                                {props.room.endAllocationDateTime.split('T')[0]}{" "}
+                                {props.room.endAllocationDateTime.split('T')[1].split('Z')[0].split(':')[0]}:
+                                {props.room.endAllocationDateTime.split('T')[1].split('Z')[0].split(':')[1]}
                             </Typography>
                             <Typography variant="h4" color="text.secondary">
                                 Цена за ночь: {props.room.priceForDay}

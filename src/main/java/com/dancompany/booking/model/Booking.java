@@ -38,7 +38,7 @@ public class Booking {
     @JoinColumn(name = "backpacker_id", referencedColumnName = "id")
     private Backpacker backpacker;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // think about
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 

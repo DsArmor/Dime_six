@@ -27,8 +27,8 @@ function HotelRooms() {
     const [showItem, setShowItem] = useState(false);
     const [fullRoom, setFullRoom] = useState({});
 
-    const [start, setStart] = React.useState(new Date('2022-05-22T00:00:00.000Z'));
-    const [end, setEnd] = React.useState(new Date('2022-05-22T00:00:00.000Z'));
+    const [start, setStart] = React.useState(new Date());
+    const [end, setEnd] = React.useState(new Date());
     const [desc, setDesc] = useState("");
     const [price, setPrice] = useState(-1);
     const [name, setName] = useState("");

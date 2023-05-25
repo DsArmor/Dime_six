@@ -19,10 +19,14 @@ const Room = (props) => {
                         {props.room.description}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" paddingBottom="2px">
-                        {props.room.startAllocationDateTime}
+                        {props.room.startAllocationDateTime.split('T')[0]}{" "}
+                        {props.room.startAllocationDateTime.split('T')[1].split('Z')[0].split(':')[0]}:
+                        {props.room.startAllocationDateTime.split('T')[1].split('Z')[0].split(':')[1]}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" paddingBottom="2px">
-                        {props.room.endAllocationDateTime}
+                        {props.room.endAllocationDateTime.split('T')[0]}{" "}
+                        {props.room.endAllocationDateTime.split('T')[1].split('Z')[0].split(':')[0]}:
+                        {props.room.endAllocationDateTime.split('T')[1].split('Z')[0].split(':')[1]}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Цена за ночь: {props.room.priceForDay}
