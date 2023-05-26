@@ -43,7 +43,7 @@ export default function SignIn() {
     const [upPassword, setUpPassword] = useState("");
     const [upName, setUpName] = useState("");
     const [itemSignUp, setItemSignUp] = useState(false)
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState("backpacker");
     const [formUpErrors, setFormUpErrors] = useState({});
 
     const navigate = useNavigate();
@@ -217,7 +217,7 @@ export default function SignIn() {
                                 value={value}
                                 onChange={handleRadioChange}
                             >
-                                <FormControlLabel value="backpacker" control={<Radio />} label="Турист" />
+                                <FormControlLabel value="backpacker" control={<Radio />} label="Турист" checked={value === "backpacker"}/>
                                 <FormControlLabel value="hotel" control={<Radio />} label="Отельер" />
                             </RadioGroup>
                         </FormControl>
